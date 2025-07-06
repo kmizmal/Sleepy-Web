@@ -1,0 +1,33 @@
+import { defineStore } from 'pinia'
+
+export const useHitokotoStore = defineStore('hitokoto', {
+  state: () => ({
+    hitokoto: {
+      text: '代码如诗，岁月如歌',
+      from: '开发者日记',
+      link: 'https://github.com/kmizmal'
+    }
+  }),
+  actions: {
+    async updateHitokoto() {
+      try {
+        const response = await fetch('https://v1.hitokoto.cn/')
+        const data = await response.json()
+        this.hitokoto = {
+          text: data.hitokoto,
+          from: data.from || '未知',
+          link: `https://hitokoto.cn/?uuid=${data.uuid}`
+        }
+        // console.log('响应数据:', data)
+        // console.log('获取一言成功:', this.hitokoto)
+      } catch (error) {
+        console.error('获取一言失败:', error)
+        this.hitokoto = {
+          text: '总愿在平凡的日子里发现无数温暖的惊喜',
+          from: 'kmizmal',
+          link: 'https://home.zmal.top'
+        }
+      }
+    }
+  }
+})

@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+:root {
+  --primary-gradient: linear-gradient(135deg, #3498db, #8e44ad);
+  --card-bg: #2d3439;
+  --online: #2ecc71;
+  --offline: #e74c3c;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: #ecf0f1;
+  min-height: 100vh;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+#app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.container {
+    display: flex;
+    gap: 25px;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  .container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+h1 {
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+b {
+  color: #3498db;
+  font-weight: 600;
+}

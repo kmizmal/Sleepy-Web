@@ -1,0 +1,9 @@
+{
+    "a-test": "ri-arrow-left-up-line",
+    "1-test": "ri-arrow-left-right-fill",
+    "iPad": "fas fa-tablet-alt",
+    "NASServer": "fas fa-server",
+    "SmartWatch": "fas fa-clock",
+    "DesktopPC": "fas fa-desktop",
+    "SmartTV": "fas fa-tv"
+}
