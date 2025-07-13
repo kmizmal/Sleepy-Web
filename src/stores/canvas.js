@@ -1,9 +1,10 @@
-class ParticleBackground {
+export default class ParticleBackground {
     constructor(options = {}) {
         this.config = Object.assign({
             zIndex: -1,
             opacity: 1,
-            count: 85
+            count: 85,
+            color: null // 可以传入颜色值，默认为随机颜色
         }, options);
 
         this.particles = [];
@@ -134,7 +135,7 @@ class ParticleBackground {
 }
 
 // 启动粒子背景
-const particleBg = new ParticleBackground({
-    opacity: 0.9,
-    count: 100
-});
+// const particleBg = new ParticleBackground({
+//     opacity: 0.9,
+//     count: 100
+// });

@@ -79,6 +79,9 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 .card {
   width: 100%;
+  opacity: 0.9;
+  backdrop-filter: blur(10px);      
+  -webkit-backdrop-filter: blur(10px); /* Safari 支持 */
   background: linear-gradient(135deg, #2c3e50, #1a1a2e);
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
