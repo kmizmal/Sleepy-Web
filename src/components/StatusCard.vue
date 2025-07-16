@@ -43,6 +43,7 @@
         >
           <div class="device-icon">
             <i :class="device.icon"></i>
+            <!-- {{device.icon}} -->
           </div>
           <div class="device-name" :title="device.name">{{ device.name }}</div>
           <div
@@ -84,44 +85,40 @@ onUnmounted(() => {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 
-  /* 优化后的渐变背景 - 更柔和的蓝紫过渡 */
-  background: linear-gradient(
-    135deg,
-    rgba(141, 68, 173, 0.7) 0%,
-    rgba(57, 197, 188, 0.7) 35%,
-    rgba(52, 152, 219, 0.7) 70%,
-    rgba(102, 204, 255, 0.7) 100%
-  );
+  /* 备选样式 */
+  // background: linear-gradient(
+  //   135deg,
+  //   rgba(141, 68, 173, 0.7) 0%,
+  //   rgba(57, 197, 188, 0.7) 35%,
+  //   rgba(52, 152, 219, 0.7) 70%,
+  //   rgba(102, 204, 255, 0.7) 100%
+  // );
 
   border-radius: 16px;
   padding: 25px;
-  color: white;
   margin-bottom: 25px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.1);
 
   .card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     h1 {
       font-size: 2.2rem;
-      margin: 0 0 20px;
       text-align: center;
-      font-weight: 700;
-
-      background: linear-gradient(45deg, #39c5bb, #66ccff, #8e44ad);
+      background: linear-gradient(35deg, #39c5bb, #66ccff, #8e44ad);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .connection-status {
       text-align: center;
-      margin-top: 10px;
-      font-weight: 500;
 
-      &.connected {
-        color: #2ecc71;
-      }
+      // &.connected {
+      //   color: #2ecc71;
+      // }
 
       &.disconnected {
         color: #ff6b6b;
@@ -164,6 +161,7 @@ onUnmounted(() => {
         font-size: 1.5rem;
         font-weight: 600;
         margin-bottom: 5px;
+        mix-blend-mode: difference;
         color: #e0f7ff;
       }
 
@@ -192,6 +190,7 @@ onUnmounted(() => {
       font-size: 1.1rem;
       line-height: 1.6;
       border-left: 4px solid #39c5bb;
+      mix-blend-mode: overlay;
       color: #f0f8ff;
     }
   }
@@ -211,7 +210,7 @@ onUnmounted(() => {
       color: #a6e1fa;
 
       i {
-        margin-right: 10px;
+        // margin-right: 10px;
         color: #66ccff;
       }
     }
@@ -281,6 +280,39 @@ onUnmounted(() => {
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.5);
     font-style: italic;
+  }
+}
+.glassDiv {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  border-radius: 28px;
+  cursor: move;
+  isolation: isolate;
+  touch-action: none;
+  /* enable pointer dragging on touch */
+  box-shadow: 0px 6px var(--outer-shadow-blur) rgba(0, 0, 0, 0.2);
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: 28px;
+    box-shadow: inset var(--shadow-offset) var(--shadow-offset)
+      var(--shadow-blur) var(--shadow-spread) var(--shadow-color);
+    background-color: rgba(var(--tint-color), var(--tint-opacity));
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: 28px;
+    backdrop-filter: blur(var(--frost-blur));
+    filter: url(#glass-distortion);
+    isolation: isolate;
+    -webkit-backdrop-filter: blur(var(--frost-blur));
+    -webkit-filter: url("#glass-distortion");
   }
 }
 </style>

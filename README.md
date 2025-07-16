@@ -53,9 +53,12 @@ pnpm build
 图标来源：[Remix Icon 图标库](https://remixicon.com)
 
 > 访问官网，挑选图标并复制其类名，填入如下格式：
+> 注意请勿遗漏`ri-`前缀
 
 ```json
 {
+  "ace3": "ri-phone-camera-line",
+  
   "MacBookPro": "fas fa-laptop",
   "iPhone15": "fas fa-mobile-alt",
   "iPad": "fas fa-tablet-alt",

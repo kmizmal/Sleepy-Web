@@ -40,11 +40,10 @@ onUnmounted(() => {
   padding: 30px;
   border-radius: 16px;
   background: linear-gradient(135deg, #3498db, #8e44ad);
-  color: #fff;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  /* color: #fff; */
+  /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); */
   @media screen and (min-width: 900px) {
    width: 50%;
-  
   }
 }
 
@@ -68,17 +67,16 @@ onUnmounted(() => {
 .quote-content {
   position: relative;
   z-index: 1;
-  margin-bottom: 25px;
   padding: 0 20px;
   font-size: 1.5rem;
   line-height: 1.6;
   font-weight: 500;
-  font-style: italic;
   text-align: center;
+  user-select: none;
+  mix-blend-mode: overlay;
   text-decoration: none;
 }
 
-/* 引用内的图标（如引号） */
 .quote-content i {
   font-size: 1.2rem;
   margin: 0 10px;

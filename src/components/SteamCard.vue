@@ -1,6 +1,6 @@
 <template>
   <div
-    class="steam-card"
+    class="steam-card card"
     v-if="data"
     :style="{ backgroundImage: `url(${data.background})` }"
   >
@@ -88,14 +88,12 @@ export default {
 <style scoped lang="scss">
 .steam-card {
   position: relative;
-  background-color: #2d3439;
   opacity: 0.85;
   width: 300px;
   padding: 20px;
   border-radius: 10px;
   background-size: cover;
   background-position: center;
-  color: white;
   font-family: Arial, sans-serif;
   overflow: hidden;
 

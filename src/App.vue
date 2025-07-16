@@ -27,8 +27,9 @@ if (import.meta.env.VITE_Background_Canvas === "true") {
   padding: 20px;
 }
 .more {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
 }
 </style>
