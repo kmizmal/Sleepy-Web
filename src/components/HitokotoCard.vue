@@ -32,6 +32,9 @@ onUnmounted(() => {
 <style scoped>
 /* 容器卡片样式 */
 .quote-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: relative;
   overflow: hidden;
   padding: 30px;
@@ -39,6 +42,10 @@ onUnmounted(() => {
   background: linear-gradient(135deg, #3498db, #8e44ad);
   color: #fff;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  @media screen and (min-width: 900px) {
+   width: 50%;
+  
+  }
 }
 
 /* 背景发光效果 */

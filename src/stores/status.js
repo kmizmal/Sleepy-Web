@@ -68,7 +68,7 @@ export const useStatusStore = defineStore('status', {
     // 处理更新数据
     processUpdate(data) {
       // 状态信息更新
-      console.log('接收到更新数据:', data)
+      // console.log('接收到更新数据:', data)
       if (data.info) {
         this.statusInfo = statusData[data.status]
         // console.log('状态信息更新:', this.statusInfo)

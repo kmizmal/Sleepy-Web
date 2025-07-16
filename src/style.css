@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap'); */
 
 :root {
   --primary-gradient: linear-gradient(135deg, #3498db, #8e44ad);
@@ -14,35 +14,18 @@
 }
 
 body {
-  font-family: 'Noto Sans SC', sans-serif;
-  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  /* font-family: 'Noto Sans SC', sans-serif; */
   color: #ecf0f1;
-  min-height: 100vh;
-  padding: 20px;
+  padding: 3rem;
   line-height: 1.6;
-}
-
-#app {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.container {
-    display: flex;
-    gap: 25px;
-    align-content: center;
-    flex-wrap: wrap;
-}
-
-@media (min-width: 768px) {
-  .container {
-    grid-template-columns: 1fr 1fr;
+  background: url("https://t.alcy.cc/ycy") center center/cover no-repeat;
+  @media (max-width: 768px) {
+    padding: 10px;
+    background-image: url("https://t.alcy.cc/moemp");
   }
 }
 
 .card {
-  background: var(--card-bg);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
