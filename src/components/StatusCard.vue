@@ -40,6 +40,7 @@
           class="device-card"
           v-for="device in statusStore.devices"
           :key="device.id"
+          :title="convertToTimeZone(device.time)"
         >
           <div class="device-icon">
             <i :class="device.icon"></i>
@@ -57,7 +58,9 @@
       </div>
     </div>
 
-    <div class="last-updated">最后更新: {{ statusStore.lastUpdated }}</div>
+    <div class="last-updated">
+      最后更新: {{ convertToTimeZone(statusStore.lastUpdated) }}
+    </div>
   </div>
 </template>
 
@@ -69,6 +72,57 @@ const statusStore = useStatusStore();
 const isConnected = computed(() => statusStore.isConnected);
 const userName = import.meta.env.VITE_USER_NAME;
 const userAvatar = import.meta.env.VITE_USER_AVATAR;
+
+const timeZone = import.meta.env.VITE_TIME_ZONE || "Asia/Shanghai";
+function convertToTimeZone(timeInput, tz = timeZone) {
+  let date;
+
+  // 处理不同类型的输入
+  if (timeInput instanceof Date) {
+    date = timeInput;
+  } else if (typeof timeInput === "string") {
+    const cleanedTimeStr = timeInput.replace(/[^\dTZ:.-]/g, "").trim();
+
+    if (!cleanedTimeStr) {
+      console.warn("空的时间字符串");
+      return "未知时间";
+    }
+
+    date = new Date(cleanedTimeStr);
+  } else {
+    console.warn("无效的时间输入:", timeInput);
+    return "未知时间";
+  }
+
+  if (isNaN(date)) {
+    console.warn("无法解析的时间输入:", timeInput);
+    return "未知时间";
+  }
+
+  // 使用 formatToParts 格式化为 yyyy-MM-dd:hh:mm:ss
+  try {
+    const parts = new Intl.DateTimeFormat("sv-SE", {
+      timeZone: tz,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    }).formatToParts(date);
+
+    const get = (type) => parts.find((p) => p.type === type)?.value;
+
+    return `${get("month")}-${get("day")}/${get("hour")}:${get("minute")}:${get(
+      "second"
+    )}`;
+  } catch (error) {
+    console.error("时间格式化失败:", error);
+    return "格式化失败";
+  }
+}
+
 onMounted(() => {
   statusStore.initSSEConnection();
 });
@@ -279,39 +333,6 @@ onUnmounted(() => {
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.5);
     font-style: italic;
-  }
-}
-.glassDiv {
-  position: absolute;
-  width: 300px;
-  height: 200px;
-  border-radius: 28px;
-  cursor: move;
-  isolation: isolate;
-  touch-action: none;
-  /* enable pointer dragging on touch */
-  box-shadow: 0px 6px var(--outer-shadow-blur) rgba(0, 0, 0, 0.2);
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    border-radius: 28px;
-    box-shadow: inset var(--shadow-offset) var(--shadow-offset)
-      var(--shadow-blur) var(--shadow-spread) var(--shadow-color);
-    background-color: rgba(var(--tint-color), var(--tint-opacity));
-  }
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    border-radius: 28px;
-    backdrop-filter: blur(var(--frost-blur));
-    filter: url(#glass-distortion);
-    isolation: isolate;
-    -webkit-backdrop-filter: blur(var(--frost-blur));
-    -webkit-filter: url("#glass-distortion");
   }
 }
 </style>

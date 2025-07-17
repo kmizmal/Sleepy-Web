@@ -66,11 +66,11 @@ export const useStatusStore = defineStore('status', {
 
     // 处理更新数据
     processUpdate(data) {
-      console.log('接收到更新数据:', data)
+      // console.log('接收到更新数据:', data)
       // 状态信息更新
       if (typeof data.status === 'number') {
         this.statusInfo = statusData[data.status]
-        console.log('状态信息更新:', this.statusInfo)
+        // console.log('状态信息更新:', this.statusInfo)
       }
     
       // 设备列表更新
@@ -80,7 +80,8 @@ export const useStatusStore = defineStore('status', {
           name: device?.show_name || name,
           icon: this.getDeviceIcon(name),
           status: device?.using ?? 'unknown',
-          statusText: device?.app_name ?? '未知状态'
+          statusText: device?.app_name ?? '未知状态',
+          time: device?.time || '未知时间',
         }))
       }
     
