@@ -58,7 +58,7 @@ pnpm build
 ```json
 {
   "ace3": "ri-phone-camera-line",
-  
+
   "MacBookPro": "fas fa-laptop",
   "iPhone15": "fas fa-mobile-alt",
   "iPad": "fas fa-tablet-alt",
@@ -70,3 +70,6 @@ pnpm build
   // 自定义图标功能开发中...
 }
 ```
+# 致谢
+- [图标包](https://github.com/Remix-Design/RemixIcon)
+- [背景图片api](https://t.alcy.cc/)

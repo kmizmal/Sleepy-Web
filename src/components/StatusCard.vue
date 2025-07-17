@@ -210,7 +210,6 @@ onUnmounted(() => {
       color: #a6e1fa;
 
       i {
-        // margin-right: 10px;
         color: #66ccff;
       }
     }

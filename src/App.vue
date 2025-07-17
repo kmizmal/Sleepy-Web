@@ -1,7 +1,10 @@
 <template>
   <div class="container">
     <StatusCard />
-    <div class="more"><HitokotoCard /> <SteamCard /></div>
+    <div class="more">
+      <HitokotoCard />
+      <SteamCard v-if="showSteamCard" />
+    </div>
   </div>
 </template>
 
@@ -18,6 +21,7 @@ if (import.meta.env.VITE_Background_Canvas === "true") {
     });
   });
 }
+const showSteamCard = import.meta.env.VITE_STEAM_Enabled == "true";
 </script>
 
 <style>
@@ -27,9 +31,9 @@ if (import.meta.env.VITE_Background_Canvas === "true") {
   padding: 20px;
 }
 .more {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-around;
 }
 </style>

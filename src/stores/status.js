@@ -10,28 +10,30 @@ export const useStatusStore = defineStore('status', {
     lastUpdated: '很久以前',
     sseConnection: null,
     isConnected: false,
-    retryCount: 0, // 新增：连接重试次数
-    maxRetries: 5  // 新增：最多重连次数
+    retryCount: 0,
+    maxRetries: 5
   }),
 
   actions: {
-    // 初始化 SSE 连接
     initSSEConnection() {
-      // 防止重复连接
       if (this.isConnected && this.sseConnection?.readyState === 1) return
-
-      // 关闭旧连接
+  
       if (this.sseConnection) {
         this.sseConnection.close()
       }
-
+  
       try {
-        const url = `${import.meta.env.VITE_SERVER_URL}/events`
-        this.sseConnection = new EventSource(url)
+        const secret = import.meta.env.VITE_SERVER_SECRET || ''
+  
+        const url = new URL(`${import.meta.env.VITE_SERVER_URL}/events`)
+        if (secret) {
+          url.searchParams.append('secret', secret)
+        }
+  
+        this.sseConnection = new EventSource(url.toString())
         this.isConnected = true
         this.retryCount = 0
-
-        // 接收更新事件
+  
         this.sseConnection.addEventListener('update', (event) => {
           try {
             const data = JSON.parse(event.data)
@@ -40,26 +42,23 @@ export const useStatusStore = defineStore('status', {
             console.error('Error parsing update event:', error)
           }
         })
-
-        // 接收心跳事件
+  
         this.sseConnection.addEventListener('heartbeat', (event) => {
           this.lastUpdated = event.data || '刚刚'
         })
-
-        // 错误处理与重连
+  
         this.sseConnection.onerror = () => {
           console.error('SSE connection error')
           this.isConnected = false
-
+  
           if (++this.retryCount <= this.maxRetries) {
             setTimeout(() => {
               this.initSSEConnection()
-            }, Math.min(1000 * 2 ** this.retryCount, 30000)) // 指数退避最大30秒
+            }, Math.min(1000 * 2 ** this.retryCount, 30000))
           } else {
             console.warn('SSE 已超过最大重连次数')
           }
         }
-
       } catch (err) {
         console.error('SSE 初始化失败：', err)
       }
@@ -67,33 +66,32 @@ export const useStatusStore = defineStore('status', {
 
     // 处理更新数据
     processUpdate(data) {
+      console.log('接收到更新数据:', data)
       // 状态信息更新
-      // console.log('接收到更新数据:', data)
-      if (data.info) {
+      if (typeof data.status === 'number') {
         this.statusInfo = statusData[data.status]
-        // console.log('状态信息更新:', this.statusInfo)
+        console.log('状态信息更新:', this.statusInfo)
       }
-
+    
       // 设备列表更新
       if (data.device && typeof data.device === 'object') {
-        // console.log('设备数据:', data.device)
         this.devices = Object.entries(data.device).map(([name, device]) => ({
           id: name,
-          name: device?.show_name,
+          name: device?.show_name || name,
           icon: this.getDeviceIcon(name),
           status: device?.using ?? 'unknown',
           statusText: device?.app_name ?? '未知状态'
         }))
-        // const allFalse = this.devices.every(device => device.status === false)
-
       }
-
+    
       // 更新时间
-      if (data.time) {
+      if (data.last_updated) {
         this.lastUpdated = data.last_updated
+      } else if (data.time) {
+        this.lastUpdated = data.time
       }
     },
-
+    
     // 获取设备图标
     getDeviceIcon(deviceName) {
       return iconMap[deviceName] || 'fas fa-question-circle'
