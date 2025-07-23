@@ -30,7 +30,8 @@
       <div
         class="observe-badge"
         v-if="userobserve === 'true'"
-        :title="`当前在线人数: ${statusStore.observer}`">
+        :title="`当前在线人数: ${statusStore.observer}`"
+      >
         当前在线人数:{{ statusStore.observer }}
       </div>
     </div>
@@ -53,12 +54,20 @@
             <!-- {{device.icon}} -->
           </div>
           <div class="device-name" :title="device.name">{{ device.name }}</div>
-          <div
-            class="device-status"
-            :class="device.status ? 'online' : 'offline'"
-            :title="device.statusText"
-          >
-            {{ device.statusText }}
+          <div class="device-status-card">
+            <div
+              class="device-status"
+              :class="[
+                device.status ? 'online' : 'offline',
+                device.media ? 'device-status-media' : '',
+              ]"
+              :title="device.statusText"
+            >
+              {{ device.statusText }}
+            </div>
+            <div class="device-media" v-if="device.media">
+              {{ device.media_content }}
+            </div>
           </div>
         </div>
       </div>
@@ -229,7 +238,7 @@ onUnmounted(() => {
       text-align: center;
       max-width: 70%;
     }
-    
+
     p {
       background: rgba(255, 255, 255, 0.08);
       padding: 15px;
@@ -265,7 +274,38 @@ onUnmounted(() => {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 15px;
-
+      .device-status-card {
+        // display: flex;
+        position: relative;
+        .device-media {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: #66ccff7a;
+          color: #4cefe4;
+          width: 20rem;
+          border-radius: 5px;
+          padding: 5px 5px;
+          opacity: 0;
+        }
+        .device-status-media {
+          opacity: 1;
+        }
+        &:hover {
+          .device-media {
+            opacity: 1;
+          }
+          .device-status-media {
+            opacity: 0;
+          }
+        }
+        &::after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+      }
       .device-card {
         background: rgba(72, 64, 107, 0.4);
         border-radius: 12px;
