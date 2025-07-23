@@ -15,19 +15,22 @@
 body {
   /* font-family: 'Noto Sans SC', sans-serif; */
   color: #ecf0f1;
-  padding: 3rem;
+  padding: 0 3rem;
   line-height: 1.6;
   background: url("https://t.alcy.cc/ycy") center center/cover no-repeat;
   @media (max-width: 768px) {
-    padding: 10px;
+    padding:0 10px;
     background-image: url("https://t.alcy.cc/moemp");
   }
 }
 
 .card {
+  width: 100%;
   border-radius: 16px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
   &:hover {
     transform: translateY(-5px);
@@ -43,4 +46,7 @@ h1 {
 b {
   color: #3498db;
   font-weight: 600;
+}
+a{
+  text-decoration: none;
 }

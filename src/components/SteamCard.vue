@@ -88,7 +88,7 @@ export default {
 <style scoped lang="scss">
 .steam-card {
   position: relative;
-  opacity: 0.85;
+  opacity: 0.9;
   width: 300px;
   padding: 20px;
   border-radius: 10px;

@@ -74,7 +74,6 @@ onUnmounted(() => {
   text-align: center;
   user-select: none;
   mix-blend-mode: overlay;
-  text-decoration: none;
 }
 
 .quote-content i {

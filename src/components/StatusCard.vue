@@ -141,15 +141,9 @@ onUnmounted(() => {
 
 <style lang="scss" scoped>
 .card {
-  width: 100%;
-  opacity: 0.9;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
-  border-radius: 16px;
+  opacity: 0.95;
   padding: 25px;
   margin-bottom: 25px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.1);
 
   .card-header {
