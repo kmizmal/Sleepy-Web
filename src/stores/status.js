@@ -11,7 +11,8 @@ export const useStatusStore = defineStore('status', {
     sseConnection: null,
     isConnected: false,
     retryCount: 0,
-    maxRetries: 5
+    maxRetries: 5,
+    observer: 0,
   }),
 
   actions: {
@@ -90,6 +91,10 @@ export const useStatusStore = defineStore('status', {
         this.lastUpdated = data.last_updated
       } else if (data.time) {
         this.lastUpdated = data.time
+      }
+
+      if (data.observer) {
+        this.observer = data.observer
       }
     },
     

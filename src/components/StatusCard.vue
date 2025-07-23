@@ -27,6 +27,12 @@
           {{ statusStore.statusInfo.name }}
         </div>
       </div>
+      <div
+        class="observe-badge"
+        v-if="userobserve === 'true'"
+        :title="`当前在线人数: ${statusStore.observer}`">
+        当前在线人数:{{ statusStore.observer }}
+      </div>
     </div>
 
     <div class="status-info">
@@ -72,6 +78,7 @@ const statusStore = useStatusStore();
 const isConnected = computed(() => statusStore.isConnected);
 const userName = import.meta.env.VITE_USER_NAME;
 const userAvatar = import.meta.env.VITE_USER_AVATAR;
+const userobserve = import.meta.env.VITE_USER_OBSERVE || "false";
 
 const timeZone = import.meta.env.VITE_TIME_ZONE || "Asia/Shanghai";
 function convertToTimeZone(timeInput, tz = timeZone) {
@@ -139,15 +146,6 @@ onUnmounted(() => {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 
-  /* 备选样式 */
-  // background: linear-gradient(
-  //   135deg,
-  //   rgba(141, 68, 173, 0.7) 0%,
-  //   rgba(57, 197, 188, 0.7) 35%,
-  //   rgba(52, 152, 219, 0.7) 70%,
-  //   rgba(102, 204, 255, 0.7) 100%
-  // );
-
   border-radius: 16px;
   padding: 25px;
   margin-bottom: 25px;
@@ -169,10 +167,6 @@ onUnmounted(() => {
 
     .connection-status {
       text-align: center;
-
-      // &.connected {
-      //   color: #2ecc71;
-      // }
 
       &.disconnected {
         color: #ff6b6b;
@@ -237,6 +231,11 @@ onUnmounted(() => {
   }
 
   .status-info {
+    @media screen and (min-width: 768px) {
+      text-align: center;
+      max-width: 70%;
+    }
+    
     p {
       background: rgba(255, 255, 255, 0.08);
       padding: 15px;

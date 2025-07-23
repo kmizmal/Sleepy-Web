@@ -57,7 +57,7 @@ export default {
       try {
         const response = await fetch(`${apiUrl}/?steamid=${steamid}`);
         data.value = await response.json();
-        console.log("Fetched Steam data:", data.value);
+        // console.log("Fetched Steam data:", data.value);
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
