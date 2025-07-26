@@ -151,17 +151,16 @@ export default {
   align-items: center;
   margin-bottom: 10px;
   line-height: 1rem;
-  p{
+  p {
     mix-blend-mode: difference;
   }
-  .game-logo{
+  .game-logo {
     width: 100%;
-}
+  }
   .badge-icon {
     width: 30px;
     height: 30px;
     margin-right: 10px;
   }
 }
-
 </style>

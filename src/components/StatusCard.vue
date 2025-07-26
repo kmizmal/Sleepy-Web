@@ -290,14 +290,14 @@ onUnmounted(() => {
           opacity: 0;
         }
         .device-status-media {
-          opacity: 1;
+          opacity: 1
         }
         &:hover {
           .device-media {
-            opacity: 1;
+            opacity: 1
           }
           .device-status-media {
-            opacity: 0;
+            opacity: 0
           }
         }
         &::after {

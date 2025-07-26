@@ -9,24 +9,24 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue'
-import { useHitokotoStore } from '@/stores/hitokoto.js'
+import { onMounted, onUnmounted } from "vue";
+import { useHitokotoStore } from "@/stores/hitokoto.js";
 
-const hitokotoStore = useHitokotoStore()
+const hitokotoStore = useHitokotoStore();
 
-// 每小时更新一次一言
-let hitokotoInterval
+// 每半小时更新一次一言
+let hitokotoInterval;
 
 onMounted(() => {
-  hitokotoStore.updateHitokoto()
+  hitokotoStore.updateHitokoto();
   hitokotoInterval = setInterval(() => {
-    hitokotoStore.updateHitokoto()
-  }, 3600000)
-})
+    hitokotoStore.updateHitokoto();
+  }, 1800000);
+});
 
 onUnmounted(() => {
-  clearInterval(hitokotoInterval)
-})
+  clearInterval(hitokotoInterval);
+});
 </script>
 
 <style scoped>
@@ -40,10 +40,11 @@ onUnmounted(() => {
   padding: 30px;
   border-radius: 16px;
   background: linear-gradient(135deg, #3498db, #8e44ad);
+
   /* color: #fff; */
   /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); */
   @media screen and (min-width: 900px) {
-   width: 50%;
+    width: 50%;
   }
 }
 
@@ -56,11 +57,9 @@ onUnmounted(() => {
   width: 200%;
   height: 200%;
   z-index: 0;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0) 70%
-  );
+  background: radial-gradient(circle,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0) 70%);
 }
 
 /* 引用文本样式 */
